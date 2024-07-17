@@ -18,14 +18,16 @@
 ##  ./_variables.tf
 ##  This file contains code written by SevenPico, Inc.
 ## ----------------------------------------------------------------------------
-
 variable "rotation_days" {
   type    = number
   default = 365
+  description = "(Number) Number of days to add to the base timestamp to configure the rotation timestamp."
 }
 
-variable "registration_limit" {
-  default = "10"
+variable "registration_limit"{
+  type    = number
+  default = 1
+  description = "(Optional) The maximum number of managed instances you want to register. The default value is 1 instance."
 }
 
 variable "kms_key_deletion_window_in_days" {
