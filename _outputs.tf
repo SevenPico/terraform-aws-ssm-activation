@@ -19,7 +19,10 @@
 ##  This file contains code written by SevenPico, Inc.
 ## ----------------------------------------------------------------------------
 
-# TODO
 output "iam_role_arn" {
   value = module.ssm_activation_iam_role.arn
+}
+
+output "expiration_date_RFC3339_format" {
+  value = try(time_rotating.activation_code_rotation[0].id, "")
 }
