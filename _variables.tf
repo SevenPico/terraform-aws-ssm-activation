@@ -18,13 +18,13 @@
 ##  ./_variables.tf
 ##  This file contains code written by SevenPico, Inc.
 ## ----------------------------------------------------------------------------
-variable "rotation_days" {
+variable "registration_instance_limit_days" {
   type    = number
-  default = 365
+  default = 30
   description = "(Number) Number of days to add to the base timestamp to configure the rotation timestamp."
 }
 
-variable "registration_limit"{
+variable "registration_instance_limit"{
   type    = number
   default = 1
   description = "(Optional) The maximum number of managed instances you want to register. The default value is 1 instance."
@@ -73,4 +73,9 @@ variable "secret_update_sns_pub_principals" {
 variable "secret_update_sns_sub_principals" {
   type    = map(any)
   default = {}
+}
+
+variable "iam_role_arn" {
+  type = string
+  default = ""
 }
