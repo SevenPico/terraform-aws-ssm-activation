@@ -9,13 +9,13 @@ module "ssm_activation_iam_role" {
   assume_role_actions = ["sts:AssumeRole"]
   assume_role_conditions = [
     {
-      test     = "aws:SourceAccount"
-      variable = "StringEquals"
+      test     = "StringEquals"
+      variable = "aws:SourceAccount"
       values   = [local.account_id]
     },
     {
-      test     = "aws:SourceArn"
-      variable = "StringEquals"
+      test     = "StringEquals"
+      variable = "aws:SourceArn"
       values   = ["${local.arn_prefix}:ssm:${local.region}:${local.account_id}:*"]
   }]
   instance_profile_enabled = false
