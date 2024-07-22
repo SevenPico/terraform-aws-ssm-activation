@@ -18,7 +18,7 @@ module "ssm_activation_iam_role" {
       variable = "aws:SourceArn"
       values   = ["${local.arn_prefix}:ssm:${local.region}:${local.account_id}:*"]
   }]
-  instance_profile_enabled = false
+  instance_profile_enabled = true
   managed_policy_arns      = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
   max_session_duration     = 3600
   path                     = "/"
