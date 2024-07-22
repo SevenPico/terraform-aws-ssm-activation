@@ -1,6 +1,20 @@
 # --------------------------------------------------------------------------
 # SSM Activation Role
 # --------------------------------------------------------------------------
+data "aws_iam_policy_document" "role_policy_doc" {
+  count = module.context.enabled ? 1 : 0
+  statement {
+    sid    = "AllowIam"
+    effect = "Allow"
+    actions = [
+      "iam:PassRole"
+    ]
+    resources = [
+      "${local.arn_prefix}:iam::${local.account_id}:role/${module.context.id}"
+    ]
+  }
+}
+
 module "ssm_activation_iam_role" {
   source  = "registry.terraform.io/SevenPicoForks/iam-role/aws"
   version = "2.0.0"
@@ -24,8 +38,8 @@ module "ssm_activation_iam_role" {
   path                     = "/"
   permissions_boundary     = ""
   policy_description       = ""
-  policy_document_count    = 0
-  policy_documents         = []
+  policy_document_count    = 1
+  policy_documents         = data.aws_iam_policy_document.role_policy_doc.*.json
   principals = {
     Service : [
       "ssm.amazonaws.com"
